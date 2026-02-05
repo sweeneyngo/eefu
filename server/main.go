@@ -34,7 +34,7 @@ func main() {
 	r.Use(middleware.Logger)
 
 	r.Use(cors.Handler(cors.Options{
-		AllowedOrigins:   []string{"http://localhost:5173", "https://eefu-gamma.vercel.app/", "https://www.ifuxyl.dev"},
+		AllowedOrigins:   []string{"http://localhost:5173", "https://eefu-archive.vercel.app", "https://www.ifuxyl.dev"},
 		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
 		AllowedHeaders:   []string{"Accept", "Authorization", "Content-Type", "X-CSRF-Token"},
 		AllowCredentials: true,
