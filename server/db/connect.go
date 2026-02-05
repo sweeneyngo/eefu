@@ -2,7 +2,6 @@ package db
 
 import (
 	"log"
-	"os"
 
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
@@ -12,19 +11,7 @@ import (
 
 func ConnectDB() *gorm.DB {
 
-	// Ensure volume directory exists
-	if err := os.MkdirAll("/data", 0755); err != nil {
-		log.Fatal("failed to create data dir:", err)
-	}
-
-	var dbPath string
-	if os.Getenv("FLY_ALLOC_ID") != "" {
-		dbPath = "/data/eefu.db"
-	} else {
-		dbPath = "./data/eefu.db"
-	}
-
-	dsn := "file:" + dbPath + "?_journal_mode=WAL&_foreign_keys=on"
+	dsn := "eefu.db?_journal_mode=OFF&_foreign_keys=on"
 
 	db, err := gorm.Open(sqlite.Open(dsn), &gorm.Config{})
 	if err != nil {
