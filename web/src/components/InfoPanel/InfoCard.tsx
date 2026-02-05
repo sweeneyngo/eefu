@@ -21,7 +21,6 @@ export default function InfoCard(props: {
   );
 
   const handleCopy = (text?: string) => {
-    console.log("copying", text);
     if (!text) return;
     navigator.clipboard.writeText(text);
   };

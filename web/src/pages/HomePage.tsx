@@ -54,7 +54,6 @@ export default function HomePage() {
     try {
       const data = await fetchSongs();
       if (!data || data.length === 0) return;
-      console.log(data);
       const { nonTentative, tentative } = groupSongsByLatest(data);
       setNonTentativeSongs(nonTentative);
       setTentativeSongs(tentative);

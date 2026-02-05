@@ -69,7 +69,6 @@ export default function SongPage() {
 
   const handleDownload = () => {
     if (!audioUrl()) return () => {};
-    console.log("downloading", audioUrl());
     return () => {
       window.open(audioUrl(), "_blank");
     };
