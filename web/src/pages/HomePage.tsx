@@ -114,7 +114,7 @@ export default function HomePage() {
         />
       )}
 
-      <Show when={loaded()}>
+      <Show when={loaded() && !error()}>
         <div>
           <SearchBar value={search()} onInput={setSearch} />
         </div>
