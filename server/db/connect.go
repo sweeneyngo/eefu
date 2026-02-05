@@ -11,7 +11,7 @@ import (
 
 func ConnectDB() *gorm.DB {
 
-	dsn := "eefu.db?_journal_mode=OFF&_foreign_keys=on"
+	dsn := "./eefu.db?_journal_mode=OFF&_foreign_keys=on"
 
 	db, err := gorm.Open(sqlite.Open(dsn), &gorm.Config{})
 	if err != nil {

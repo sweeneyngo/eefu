@@ -23,6 +23,7 @@ func GetSongs(svc *services.SongService) http.HandlerFunc {
 			response.InternalServerError(err, "failed to fetch songs").Respond(w, r)
 			return
 		}
+		log.Printf("Returning %d songs\n", len(songs))
 		response.RespondWithJSON(w, http.StatusOK, songs)
 	}
 }

@@ -1,6 +1,9 @@
 import type { Song, SongMedia } from "types/song";
 
-const BASE_URL = "http://192.168.0.130:8080";
+const BASE_URL =
+  window.location.hostname === "localhost"
+    ? "http://localhost:8080"
+    : "https://eefu-api.fly.dev";
 
 export async function fetchSongs(): Promise<Song[]> {
   const res = await fetch(`${BASE_URL}/songs`);
