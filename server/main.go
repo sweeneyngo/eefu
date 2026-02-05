@@ -17,7 +17,12 @@ import (
 func main() {
 
 	if err := godotenv.Load(); err != nil {
-		log.Fatal("failed to load env")
+		log.Println("No .env file found, rely on Fly variables")
+	}
+
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
 	}
 
 	endpoint := os.Getenv("CLOUDFLARE_DEFAULT_ENDPOINT")
@@ -43,6 +48,11 @@ func main() {
 	uploader := storage.NewR2Uploader(s3)
 
 	routes.RegisterRoutes(r, database, s3, presigner, uploader)
-	log.Println("Server starting on :8080")
-	http.ListenAndServe(":8080", r)
+
+	addr := "0.0.0.0:" + port
+	log.Println("Server starting on", addr)
+
+	if err := http.ListenAndServe(addr, r); err != nil {
+		log.Fatal("server failed:", err)
+	}
 }
