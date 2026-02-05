@@ -1,4 +1,4 @@
-import { createSignal, createEffect } from "solid-js";
+import { createSignal, createEffect, onCleanup } from "solid-js";
 import { audioCtx } from "resources/audioContext";
 
 // Cache waveform outside mounts
@@ -13,6 +13,7 @@ export default function Waveform(props: {
   height: number;
 }) {
   const [loaded, setLoaded] = createSignal(false);
+  const [isDragging, setIsDragging] = createSignal(false);
 
   let canvasRef: HTMLCanvasElement | undefined;
   let offscreen: HTMLCanvasElement | null = null;
@@ -144,8 +145,34 @@ export default function Waveform(props: {
     drawPlayhead();
   });
 
+  createEffect(() => {
+    if (!isDragging()) return;
+
+    const stopDragging = () => setIsDragging(false);
+
+    window.addEventListener("mouseup", stopDragging);
+
+    onCleanup(() => {
+      window.removeEventListener("mouseup", stopDragging);
+    });
+  });
+
   return (
-    <div class="relative w-full cursor-pointer" onClick={handleSeek}>
+    <div
+      class="relative w-full cursor-pointer"
+      classList={{
+        "cursor-ew-resize": isDragging(),
+      }}
+      onMouseDown={(e) => {
+        setIsDragging(true);
+        handleSeek(e);
+      }}
+      onMouseMove={(e) => {
+        if (isDragging()) handleSeek(e);
+      }}
+      onMouseUp={() => setIsDragging(false)}
+      onMouseLeave={() => setIsDragging(false)}
+    >
       {!loaded() && (
         <div class="absolute inset-0 animate-pulse rounded-md bg-gray-200" />
       )}

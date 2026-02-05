@@ -1,9 +1,6 @@
 import type { Song, SongMedia } from "types/song";
 
-const BASE_URL =
-  window.location.hostname === "localhost"
-    ? "http://localhost:8080"
-    : "https://eefu-api.fly.dev";
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 export async function fetchSongs(): Promise<Song[]> {
   const res = await fetch(`${BASE_URL}/songs`);
