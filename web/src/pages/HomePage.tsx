@@ -55,7 +55,7 @@ export default function HomePage() {
   const [search, setSearch] = createSignal(""); // Step 1: track search input
 
   const highlightMatch = (text: string, query: string) => {
-    const { keywords, _ } = parseSearch(query);
+    const { keywords, tags } = parseSearch(query);
     const parts: any[] = [];
 
     let lastIndex = 0;
