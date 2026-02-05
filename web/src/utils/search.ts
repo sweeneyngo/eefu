@@ -21,7 +21,6 @@ export function parseSearch(query: string): {
       const match = part.match(/\/(\w+):(>=|<=|=|>|<)?(.+)/);
       if (match) {
         const [, tag, op, value] = match;
-        console.log({ tag, op, value });
         tags.push({ tag, op: (op as any) || "=", value, incomplete: false });
       }
     } else if (part.trim()) {

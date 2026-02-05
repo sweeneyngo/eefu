@@ -81,7 +81,6 @@ export default function HomePage() {
 
     try {
       const data = await fetchSongs();
-      console.log(data);
       if (!data || data.length === 0) {
         setError(true);
         return;
