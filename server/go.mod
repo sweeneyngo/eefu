@@ -27,6 +27,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v1.13.6 // indirect
 	github.com/aws/aws-sdk-go-v2/service/internal/s3shared v1.19.6 // indirect
 	github.com/aws/smithy-go v1.23.0 // indirect
+	github.com/go-chi/cors v1.2.2 // indirect
 	github.com/go-playground/locales v0.14.1 // indirect
 	github.com/go-playground/universal-translator v0.18.1 // indirect
 	github.com/jinzhu/inflection v1.0.0 // indirect
