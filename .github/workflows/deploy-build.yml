@@ -20,6 +20,10 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./web
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -47,7 +51,7 @@ jobs:
         run: pnpm install
 
       - name: Build
-        run: pnpm run build --filter ./web
+        run: pnpm run build
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -55,11 +59,11 @@ jobs:
       - name: Upload pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./web/dist # make sure your build output is here
+          path: ./dist # make sure your build output is here
 
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
 
       - name: List build output
-        run: ls -R ./web/dist
+        run: ls -R ./dist
